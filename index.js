@@ -125,6 +125,7 @@ const assignLast = function () {
             let newRadio = document.createElement('input')                   
             newRadio.type = 'radio'
             newRadio.name = 'team'
+            newRadio.value = 'team' + (i+1)
             newRadio.classList.add('mx-2')
             let newLabel = document.createElement('label')
             newLabel.innerText = teamsArray[i].innerText + "  "
@@ -132,8 +133,25 @@ const assignLast = function () {
             teamPickerParent.appendChild(newLabel)
             teamPickerParent.appendChild(newRadio)
             teamPickerParent.appendChild(newLineBreak)
-
-        }
-
+        } 
 }
 
+const assignToTeam = function () {
+
+    let allRadios = document.querySelectorAll('input[type=radio]')
+        console.log(allRadios)
+        
+        for (i=0; i<allRadios.length; i++) {
+            if (allRadios[i].checked) {
+                
+                let parentDiv = document.getElementById(allRadios[i].value)
+                let parentUl = parentDiv.childNodes[1]
+                let newLi = document.createElement('li')
+                newLi.innerText = namesInList[0]
+                parentUl.appendChild(newLi)
+                //clear the list
+                let list = document.getElementById('unassigned-pool')
+                list.innerHTML = '<p>Everybody has been assigned</p>'
+            }   
+        }
+}
