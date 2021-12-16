@@ -3,16 +3,28 @@
 
 let namesInList = []
 
-
-
 const submitName = function () {   
     let textInput = document.getElementById('nameInputs')
     let unassignedPoolContainer = document.querySelector('#unassigned-pool ul')
-    let li = document.createElement('li')
-    li.innerText = textInput.value
-    namesInList.push(li.innerText)
-    unassignedPoolContainer.appendChild(li)
+    //If input text field is empty, you cannot add any names
+    if (textInput.value !== "") {
+        let li = document.createElement('li')
+        li.innerText = textInput.value
+        namesInList.push(li.innerText)
+        unassignedPoolContainer.appendChild(li)
+        textInput.value = ''
+        textInput.focus()
+    }
 }
+
+//Enter key triggers the Submit button. Stolen from here: 
+//https://stackoverflow.com/questions/155188/trigger-a-button-click-with-javascript-on-the-enter-key-in-a-text-box
+document.getElementById("nameInputs").addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.key === 'Enter') {
+        document.getElementById("submit-name-button").click();
+    }
+});
 
 
 
@@ -49,17 +61,11 @@ const generateTeams = function () {
     let membersPerTeam = Math.floor( (namesInList.length) / numberOfTeams)
     console.log('Members per team: ' + membersPerTeam)
 
-    //take names from the list and distribute them into teams
-
+    
     if (numberOfTeams > namesInList.length) {
         alert('Not enough people to distribute')
         return
-    }
-    
-    
-    
-    
-    
+    }    
     
     //This piece creates teams: 
     let generatedTeamContainer = document.getElementById('generated-team-container')
@@ -84,28 +90,50 @@ const generateTeams = function () {
                 newLi.innerText = team[j]
                 newUlForTeam.appendChild(newLi)
             }
-    }
+        }
 
     console.log(namesInList)
 
     let unassignedPoolContainer = document.querySelector('#unassigned-pool ul')
     unassignedPoolContainer.innerHTML = `<li>${namesInList[0]}</li>`
 
-    if (namesInList[0] != undefined) {
-        alert('Outstanding member to be assigned')
-        let newButtonContainer = document.getElementById('generated-team-container')
+    //Outstanding member to be assigned. Creates a button to assign last member.
+    if (namesInList.length > 0) {        
+        let newButtonContainer = document.getElementById('unassigned-pool')
         let newButton = document.createElement('button')
         newButton.type = 'button'
+        newButton.dataset.target = '#exampleModal'
+        newButton.dataset.toggle = 'modal'
         newButton.innerText = 'Assign'
         newButton.classList.add('btn')
         newButton.classList.add('d-block')
         newButton.classList.add('mb-4')
         newButton.classList.add('btn-primary')
-        newButtonContainer.appendChild('newButton')
+        newButton.addEventListener('click', assignLast)
+        newButtonContainer.appendChild(newButton)
     }
 
 }
 
+//function to assign an outstanding member via modal
+//TODO - assign to a team functionality
+const assignLast = function () {
+    let teamsArray = document.querySelectorAll('.team h5')
+    console.log(teamsArray)
+    let teamPickerParent = document.getElementById('modal-team-picker')
+        for (i = 0; i < teamsArray.length; i++) {
+            let newRadio = document.createElement('input')                   
+            newRadio.type = 'radio'
+            newRadio.name = 'team'
+            newRadio.classList.add('mx-2')
+            let newLabel = document.createElement('label')
+            newLabel.innerText = teamsArray[i].innerText + "  "
+            let newLineBreak = document.createElement('br')            
+            teamPickerParent.appendChild(newLabel)
+            teamPickerParent.appendChild(newRadio)
+            teamPickerParent.appendChild(newLineBreak)
 
+        }
 
+}
 
