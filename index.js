@@ -111,6 +111,8 @@ const generateTeams = function () {
         newButton.classList.add('btn-primary')
         newButton.addEventListener('click', assignLast)
         newButtonContainer.appendChild(newButton)
+    } else {
+        document.getElementById('unassigned-pool').innerHTML = '<p>Everybody has been assigned</p>'
     }
 
 }
