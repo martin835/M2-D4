@@ -51,7 +51,10 @@ const generateTeams = function () {
 
     //take names from the list and distribute them into teams
 
-
+    if (numberOfTeams > namesInList.length) {
+        alert('Not enough people to distribute')
+        return
+    }
     
     
     
@@ -64,6 +67,7 @@ const generateTeams = function () {
         
         let newDivForTeam = document.createElement('div')
         newDivForTeam.classList.add('team')
+        newDivForTeam.id = 'team' + i
         let newH5Team = document.createElement('h5')
         let newUlForTeam = document.createElement('ul')
     
@@ -86,6 +90,19 @@ const generateTeams = function () {
 
     let unassignedPoolContainer = document.querySelector('#unassigned-pool ul')
     unassignedPoolContainer.innerHTML = `<li>${namesInList[0]}</li>`
+
+    if (namesInList[0] != undefined) {
+        alert('Outstanding member to be assigned')
+        let newButtonContainer = document.getElementById('generated-team-container')
+        let newButton = document.createElement('button')
+        newButton.type = 'button'
+        newButton.innerText = 'Assign'
+        newButton.classList.add('btn')
+        newButton.classList.add('d-block')
+        newButton.classList.add('mb-4')
+        newButton.classList.add('btn-primary')
+        newButtonContainer.appendChild('newButton')
+    }
 
 }
 
