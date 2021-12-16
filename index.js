@@ -152,6 +152,7 @@ const assignToTeam = function () {
                 //clear the list
                 let list = document.getElementById('unassigned-pool')
                 list.innerHTML = '<p>Everybody has been assigned</p>'
+                document.getElementById("close-modal-close").click()
             }   
         }
 }
