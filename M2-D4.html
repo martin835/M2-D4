@@ -32,6 +32,70 @@
     />
   </head>
   <body>
+
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Random team generator</h1>
+        <p class="lead">Generate random teams.</p>
+      </div>
+    </div>
+    
+    <div class="container">
+      <!-- Content here -->
+
+
+      <div class="form-group">
+
+        <div class="form-group">
+          <label for="nameInputs">Types names. Press submit button after each name.</label>
+          <input type="text" class="form-control" id="nameInputs" placeholder="Insert name">
+        </div>
+
+        <button type="button" onclick="submitName()" class="btn d-block mb-4 btn-primary">Submit name</button>
+
+        <label for="numberOfTeamsPicker">Select number of teams</label>
+        <select class="form-control" id="numberOfTeamsPicker">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>          
+        </select>
+        <button type="button" onclick="generateTeams()" class="btn d-block my-4 btn-primary">Generate teams</button>
+      </div>
+    </div>
+
+    <div class="container">
+      <h4>Available team members:</h4>
+        <div class="row">          
+          <div class="col" id="unassigned-pool">
+            <ul>
+              
+            </ul>
+          </div>          
+        </div>
+    </div>
+
+    <div class="container" id="generated-team-container">
+      <h4>Teams:</h4>
+               
+        </div>
+    </div>
+
+      
+    
+
+
+
+
+
+
+
+
+    <script src="index.js"></script>
+
+
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
